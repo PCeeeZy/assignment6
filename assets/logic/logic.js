@@ -1,8 +1,57 @@
 $(document).ready(function(){
     
-    // var queryURL = "https://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC";
-    
 
+// ********************GLOBAL VARIABLES**********************************
+
+    // we need an array for each button created--topics
+    var topics = ["Pearl Jam", "Foo Fighters", "Kendrick Lamar", "Willie Wonka", "Baby Driver", "Harry Potter"]
+
+
+
+// *************************FUNCTIONS*************************************
+
+    // we need a dynamic function to display the buttons---renderButtons
+        // for loop through topics[]
+            // each topic gets button made--attr class and val
+            // append each button
+
+    function renderButtons() {
+        $(".containerBtn").empty();
+        for(var i=0; i<topics.length; i++) {
+            var newBtn = $("<button>");
+            newBtn.addClass("btn");
+            newBtn.addClass("giphyCall")
+            newBtn.attr("data-name", topics[i]);
+            newBtn.attr("value", topics[i]);
+            newBtn.text(topics[i]);
+            $(".containerBtn").append(newBtn);
+;        }
+    }
+
+    // on click of #giphySubmit
+        // push .val().trim() to topics[]
+        // dont want repeats or default
+        // renderButtons()
+
+// **********************TO DO************************
+    // clear form upon addition of value
+
+
+    $("#giphySubmit").on("click", function(makeBtn) {
+        makeBtn.preventDefault();
+        var topic = $("#giphyBtnMkr").val().trim();
+        if (topics.includes(topic)) {
+            alert("That's already a topic! Add a new topic");
+            $("giphyBtnMkr").text("");
+            return false;
+        };
+        topics.push(topic);
+        renderButtons();
+    })
+
+    // function for rendering gifs---renderGiphy
+        // take this.val() -- var topic
+        // add topic to queryURL- "https://api.giphy.com/v1/gifs/search?api_key=dc6zaTOxFJmzC";    
     // $.ajax({
     //     url: queryURL,
     //     method: "GET"
@@ -10,45 +59,58 @@ $(document).ready(function(){
     //     .then(function(response) {
     //     console.log(response);
     // });
+        // then in #gifDisplay
+        // for loop through first 10 JSON
+            // each gif gets displayed in stop state
 
+            // important json directions
+            // .data[i].rating----rating of Gif
+            // .data[i].images.original.url----Animated gif
+            // .data[i].images.original_still.url----Still gif
+    function renderGifs() {
+        var searchTopic = $(this).val();
+        console.log(searchTopic);
+        var queryURL = `https://api.giphy.com/v1/gifs/search?api_key=dc6zaTOxFJmzC&q=${searchTopic}`;
 
-    // we need an array for each button created--topics
-    var topics = ["Pearl Jam", "Foo Fighters", "Kendrick Lamar", "Willie Wonka", "Baby Driver", "Harry Potter"]
+        $.ajax({
+            url: queryURL,
+            method: "GET"
+        }).then(function(result) {
+            console.log(result);
+            for (var i=0; i<10; i++) {
+                console.log("Rating of gif#" + i + ": " + result.data[i].rating);
+                var gifMaker = $("<img>");
+                var rating = result.data[i].rating;
+                var newGif = result.data[i].images.original.url;
+                var stillGif = result.data[i].images.original_still.url;
+                gifMaker.attr("src", stillGif);
+                gifMaker.attr("data-still", stillGif);
+                gifMaker.attr("data-animate", newGif);
+                gifMaker.attr("data-state", "still");
+                gifMaker.addClass("gif");
+                $("#gifDisplay").prepend(rating);
+                $("#gifDisplay").prepend(gifMaker);
+            }
+        })
+    };
 
-    
-    // we need a dynamic function to display the buttons---renderButtons
-        // for loop through topics[]
-            // each topic gets button made--attr class and val
-            // append each button
+    // ON CLICK FUNCTIONS
+        // click a topic button
+    $(document).on("click", ".giphyCall", renderGifs);
 
-    // on click of #giphyInput
-        // push .val().trim() to topics[]
-        // renderButtons()
+        // click on a gif
+    $(document).on("click", ".gif", function(){
+        var state = $(this).attr("data-state");
+        if (state === "still") {
+          $(this).attr("src", $(this).attr("data-animate"));
+          $(this).attr("data-state", "animate");
+        } else {
+          $(this).attr("src", $(this).attr("data-still"));
+          $(this).attr("data-state", "still");
+        }
+    })
 
-    // function for rendering gifs---renderGiphy
-        // take this.val() -- var topic
-        // add topic to queryURL
-        // AJAX
-            // then in #gifDisplay
-            // for loop through first 10 JSON
-                // <img src="https://media1.giphy.com/media/3o85xkQpyMlnBkpB9C/200_s.gif" data-still="https://media1.giphy.com/media/3o85xkQpyMlnBkpB9C/200_s.gif" data-animate="https://media1.giphy.com/media/3o85xkQpyMlnBkpB9C/200.gif" data-state="still" class="gif">
-                // each gif gets displayed in stop state
-   
-    // on click of gif to change state
-    //     $(".gif").on("click", function() {
-    //   // The attr jQuery method allows us to get or set the value of any attribute on our HTML element
-    //   var state = $(this).attr("data-state");
-    //   // If the clicked image's state is still, update its src attribute to what its data-animate value is.
-    //   // Then, set the image's data-state to animate
-    //   // Else set src to the data-still value
-    //   if (state === "still") {
-    //     $(this).attr("src", $(this).attr("data-animate"));
-    //     $(this).attr("data-state", "animate");
-    //   } else {
-    //     $(this).attr("src", $(this).attr("data-still"));
-    //     $(this).attr("data-state", "still");
-    //   }
-    // });
+    renderButtons();
 
 
 
