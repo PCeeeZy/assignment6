@@ -1,0 +1,21 @@
+body {
+    background-color: #85DCBB;
+    color: #41B3A3;
+
+};
+
+.btn {
+    background-color: seagreen;
+    color: darkgoldenrod;
+
+
+
+}
+
+#giphySubmit {
+    background-color: #e8a87c;
+    color: #e27d60;
+    border: 2px solid #e27d60;
+    margin: 5px 10px 5px 10px;
+    font-weight: bold:
+}
