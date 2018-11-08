@@ -18,20 +18,21 @@ $(document).ready(function(){
     function renderButtons() {
         $(".containerBtn").empty();
         for(var i=0; i<topics.length; i++) {
-            var newBtn = $("<button>");
-            newBtn.addClass("btn");
-            newBtn.addClass("giphyCall")
+            var newBtn = $(`<button class="giphyCall"></button>`);
+            // newBtn.addClass("btn");
+            // newBtn.addClass("btn");
+            // newBtn.addClass("giphyCall")
             newBtn.attr("data-name", topics[i]);
             newBtn.attr("value", topics[i]);
             newBtn.text(topics[i]);
-            // CSS STYLING FOR THE BUTTONS
-            newBtn.css("color", "#C38D9E");
-            newBtn.css("background-color", "#E8A87C");
-            newBtn.css("border", "2px solid #C38D9E");
-            newBtn.css("margin", "5px 10px 5px 10px");
-            newBtn.css("font-weight", "bold");
+//             // CSS STYLING FOR THE BUTTONS
+//             newBtn.css("color", "#C38D9E");
+//             newBtn.css("background-color", "#E8A87C");
+//             newBtn.css("border", "2px solid #C38D9E");
+//             newBtn.css("margin", "5px 10px 5px 10px");
+//             newBtn.css("font-weight", "bold");
             $(".containerBtn").append(newBtn);
-;        }
+        }
     }
 
     // on click of #giphySubmit

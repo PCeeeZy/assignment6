@@ -1,10 +1,10 @@
 body {
-    background-color: #85DCBB;
+    background-color: red;
     color: #41B3A3;
 
-};
+}
 
-.btn {
+.giphyCall {
     background-color: seagreen;
     color: darkgoldenrod;
 
@@ -17,5 +17,5 @@ body {
     color: #e27d60;
     border: 2px solid #e27d60;
     margin: 5px 10px 5px 10px;
-    font-weight: bold:
+    font-weight: bold;
 }
