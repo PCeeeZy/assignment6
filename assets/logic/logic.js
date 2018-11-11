@@ -6,8 +6,6 @@ $(document).ready(function(){
     // we need an array for each button created--topics
     var topics = ["Pearl Jam", "Foo Fighters", "Kendrick Lamar", "Willie Wonka", "Baby Driver", "Harry Potter"]
 
-
-
 // *************************FUNCTIONS*************************************
 
     // we need a dynamic function to display the buttons---renderButtons
@@ -19,18 +17,9 @@ $(document).ready(function(){
         $(".containerBtn").empty();
         for(var i=0; i<topics.length; i++) {
             var newBtn = $(`<button class="btn giphyCall"></button>`);
-            // newBtn.addClass("btn");
-            // newBtn.addClass("btn");
-            // newBtn.addClass("giphyCall")
             newBtn.attr("data-name", topics[i]);
             newBtn.attr("value", topics[i]);
             newBtn.text(topics[i]);
-//             // CSS STYLING FOR THE BUTTONS
-//             newBtn.css("color", "#C38D9E");
-//             newBtn.css("background-color", "#E8A87C");
-//             newBtn.css("border", "2px solid #C38D9E");
-//             newBtn.css("margin", "5px 10px 5px 10px");
-//             newBtn.css("font-weight", "bold");
             $(".containerBtn").append(newBtn);
         }
     }
@@ -40,23 +29,19 @@ $(document).ready(function(){
         // dont want repeats or default
         // renderButtons()
 
-// **********************TO DO************************
-    // clear form upon addition of value
-
-
     $("#giphySubmit").on("click", function(makeBtn) {
         makeBtn.preventDefault();
         var topic = $("#giphyBtnMkr").val().trim();
+        $("#giphyBtnMkr").val("").attr("placeholder", "Any Topic Here");
         if (topics.includes(topic)) {
             alert("That's already a topic! Add a new topic");
-            $("giphyBtnMkr").text("");
             return false;
         };
         topics.push(topic);
         renderButtons();
     })
 
-    // function for rendering gifs---renderGiphy
+    // function for rendering gifs---renderGifs
         // take this.val() -- var topic
         // add topic to queryURL- "https://api.giphy.com/v1/gifs/search?api_key=dc6zaTOxFJmzC";    
     // $.ajax({
@@ -85,7 +70,7 @@ $(document).ready(function(){
         }).then(function(result) {
             console.log(result);
             for (var i=0; i<10; i++) {
-                console.log("Rating of gif#" + i + ": " + result.data[i].rating);
+                console.log(`Rating of gif#${i}: ${result.data[i].rating}`);
                 var gifMaker = $("<img>");
                 var rating = result.data[i].rating;
                 var newGif = result.data[i].images.original.url;
@@ -95,8 +80,8 @@ $(document).ready(function(){
                 gifMaker.attr("data-animate", newGif);
                 gifMaker.attr("data-state", "still");
                 gifMaker.addClass("gif");
-                $("#gifDisplay").prepend(rating);
                 $("#gifDisplay").prepend(gifMaker);
+                $("#gifDisplay").prepend(rating);
             }
         })
     };

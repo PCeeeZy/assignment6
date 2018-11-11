@@ -31,6 +31,16 @@ Another issue was regarding the stopping of duplicate topics.
 I used a for loop originally to check for inclusion.
 Alaa turned me on to a better way which is just to use the .includes() command.
 
+
+~~~~~~~~~~~~~~
+
+Styling was an issue.  I had accidentally put a ";" after one of my element's stylng and it stopped all further styling procedures from running.  This took lots of troubleshooting because it never showed up syntactically as an error but coincidentally coincided with the elements that are dynamically created.  I took this to mean that dynamically created elements can't be styled the same way and eventually had things like:
+
+newBtn.css("background", "red");
+newBtn.css("color", "blue");
+
+This was not that difficult but very tedious and it seemed like it made more organizationally helpful to have these kinds of things in a stylesheet so I was pleased to find the hidden ";" and delete it along with the bloated js.
+
 -------------------------------------------------
 
 Big shot outs to Jon and Alaa for helping me get this javascript working smoothly.
