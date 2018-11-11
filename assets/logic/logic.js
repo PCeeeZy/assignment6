@@ -18,7 +18,7 @@ $(document).ready(function(){
     function renderButtons() {
         $(".containerBtn").empty();
         for(var i=0; i<topics.length; i++) {
-            var newBtn = $(`<button class="giphyCall"></button>`);
+            var newBtn = $(`<button class="btn giphyCall"></button>`);
             // newBtn.addClass("btn");
             // newBtn.addClass("btn");
             // newBtn.addClass("giphyCall")

@@ -1,21 +1,29 @@
 body {
-    background-color: red;
-    color: #41B3A3;
+    background-color:#401f68;
+    color: white;
 
 }
 
 .giphyCall {
-    background-color: seagreen;
-    color: darkgoldenrod;
-
-
+    background-color: #4e2a84;
+    color: white;
+    border: 2px solid #b6acd1;
 
 }
 
 #giphySubmit {
-    background-color: #e8a87c;
-    color: #e27d60;
-    border: 2px solid #e27d60;
+    background-color: #4e2a84;
+    color: white;
+    border: 2px solid #b6acd1;
     margin: 5px 10px 5px 10px;
-    font-weight: bold;
+    border-radius: .25rem;
+    padding: .375rem .75rem;
 }
+#giphyBtnMkr {
+    color: #b6acd1;
+}
+
+/* 
+purple is #401f68;
+light purple is #4e2a84;
+light grey is #b6acd1; */
